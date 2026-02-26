@@ -1,0 +1,12 @@
+SELECT 
+    sub.subject_name,
+    s.name,
+    m.marks
+FROM marks m
+JOIN students s ON m.student_id = s.student_id
+JOIN subjects sub ON m.subject_id = sub.subject_id
+WHERE (m.subject_id, m.marks) IN (
+    SELECT subject_id, MAX(marks)
+    FROM marks
+    GROUP BY subject_id
+);
