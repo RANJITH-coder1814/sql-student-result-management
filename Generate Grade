@@ -1,0 +1,13 @@
+SELECT 
+    s.name,
+    SUM(m.marks) AS total,
+    CASE
+        WHEN AVG(m.marks) >= 90 THEN 'A+'
+        WHEN AVG(m.marks) >= 80 THEN 'A'
+        WHEN AVG(m.marks) >= 70 THEN 'B'
+        WHEN AVG(m.marks) >= 60 THEN 'C'
+        ELSE 'Fail'
+    END AS grade
+FROM students s
+JOIN marks m ON s.student_id = m.student_id
+GROUP BY s.name;
